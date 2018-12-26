@@ -2,7 +2,6 @@ package demo.com.userdata.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-
 import static demo.com.userdata.util.Config.IS_FIRST_RUN;
 
 public class MyPreferences {

@@ -17,7 +17,6 @@ import io.realm.RealmResults;
 
 public class userAdapter extends RealmRecyclerViewAdapter<User, userAdapter.UserViewHolder> {
 
-
     public userAdapter(RealmResults<User> users) {
         super(users, true);
     }

@@ -1,7 +1,5 @@
 package demo.com.userdata.presenter;
 
-import android.content.Context;
-import android.widget.Toast;
 import java.util.List;
 import demo.com.userdata.UserDataApplication;
 import demo.com.userdata.contact.MainContact;
@@ -22,7 +20,6 @@ import io.reactivex.schedulers.Schedulers;
 public class MainPresenter implements MainContact.UserActionListener{
 
     private MainContact.View view;
-    private Context context;
     private Boolean imageDownload;
     private MyPreferences myPreferences;
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -67,7 +64,7 @@ public class MainPresenter implements MainContact.UserActionListener{
                         }
                     }));
         }else{
-            Toast.makeText(context, "Please check connection and try again.", Toast.LENGTH_LONG).show();
+            view.showToastMsg("Please check connection and try again.");
         }
     }
 
