@@ -6,10 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import demo.com.userdata.R;
 import demo.com.userdata.realm.dao.UserInfoDao;
 import demo.com.userdata.retrofit.model.User;
@@ -37,7 +35,6 @@ public class userAdapter extends RealmRecyclerViewAdapter<User, userAdapter.User
         if (user != null) {
             holder.bind(user);
         }
-
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
@@ -76,4 +73,5 @@ public class userAdapter extends RealmRecyclerViewAdapter<User, userAdapter.User
             }
         }
     }
+
 }

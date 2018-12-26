@@ -2,19 +2,22 @@ package demo.com.userdata.presenter;
 
 import android.content.Context;
 import android.widget.Toast;
-
 import java.util.List;
-
 import demo.com.userdata.UserDataApplication;
 import demo.com.userdata.contact.MainContact;
 import demo.com.userdata.realm.dao.UserInfoDao;
+import demo.com.userdata.retrofit.ServiceGenerator;
+import demo.com.userdata.retrofit.endpoint.UserInfoEndPoint;
 import demo.com.userdata.retrofit.model.ResponseType;
 import demo.com.userdata.retrofit.model.User;
 import demo.com.userdata.retrofit.model.UserInfo;
 import demo.com.userdata.retrofit.repo.ImageRepo;
-import demo.com.userdata.retrofit.repo.UserInfoRepo;
 import demo.com.userdata.util.MyPreferences;
 import demo.com.userdata.util.NetworkUtils;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.observers.DisposableSingleObserver;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainPresenter implements MainContact.UserActionListener{
 
@@ -22,6 +25,8 @@ public class MainPresenter implements MainContact.UserActionListener{
     private Context context;
     private Boolean imageDownload;
     private MyPreferences myPreferences;
+    private CompositeDisposable disposable = new CompositeDisposable();
+    private UserInfoEndPoint endPoint;
 
     public MainPresenter(MainContact.View view){
         this.view = view;
@@ -35,21 +40,32 @@ public class MainPresenter implements MainContact.UserActionListener{
             view.showProgressIndicator(true);
             view.removeUserButton(false);
 
-            UserInfoRepo userInfoRepo = new UserInfoRepo();
-            userInfoRepo.getUserInfoList((responseType, result, message) -> {
+            endPoint = ServiceGenerator.createService(UserInfoEndPoint.class);
+            disposable.add(
+                endPoint
+                    .getUserData()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(new DisposableSingleObserver<UserInfo>() {
+                        @Override
+                        public void onSuccess(UserInfo userInfos) {
 
-                if (responseType == ResponseType.Success) {
+                            List<User> userList = userInfos.getUsers();
 
-                    List<User> userList = ((UserInfo) result).getUsers();
-
-                    UserInfoDao userInfoDao = new UserInfoDao();
-                    userInfoDao.updateUserInfoList(userList, isSuccess -> {
-                        if (isSuccess) {
-                            downloadImage(userList);
+                            UserInfoDao userInfoDao = new UserInfoDao();
+                            userInfoDao.updateUserInfoList(userList, isSuccess -> {
+                                if (isSuccess) {
+                                    downloadImage(userList);
+                                }
+                            });
                         }
-                    });
-                }
-            });
+
+                        @Override
+                        public void onError(Throwable e) {
+                            e.printStackTrace();
+                            view.showToastMsg(" Server is busy. Please try again.");
+                        }
+                    }));
         }else{
             Toast.makeText(context, "Please check connection and try again.", Toast.LENGTH_LONG).show();
         }
@@ -98,8 +114,8 @@ public class MainPresenter implements MainContact.UserActionListener{
                         }
                     });
                 }
-
             });
         }
     }
+
 }

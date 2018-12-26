@@ -2,7 +2,7 @@ package demo.com.userdata.retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import demo.com.userdata.UserDataApplication;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -27,6 +27,7 @@ public class ServiceGenerator {
     private static Retrofit.Builder builder = new Retrofit.Builder()
             .baseUrl(API_BASE_URL)
             .client(okHttpClient)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson));
 
     private static Retrofit retrofit = builder.build();

@@ -10,8 +10,8 @@
         android:id="@+id/userData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/click_for_user_data"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:text="@string/click_for_user_data" />
 
     <ProgressBar
         android:id="@+id/progress"
@@ -21,8 +21,7 @@
         android:layout_centerInParent="true"
         android:visibility="gone" />
 
-    <android.support.v7.widget.RecyclerView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/recycler"
         android:layout_width="match_parent"

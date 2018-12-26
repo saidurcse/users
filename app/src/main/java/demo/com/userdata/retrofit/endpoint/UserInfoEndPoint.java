@@ -1,11 +1,10 @@
 package demo.com.userdata.retrofit.endpoint;
 
-import com.google.gson.JsonObject;
-
-import retrofit2.Call;
+import demo.com.userdata.retrofit.model.UserInfo;
+import io.reactivex.Single;
 import retrofit2.http.GET;
 
 public interface UserInfoEndPoint {
     @GET("intrvw/users.json")
-    Call<JsonObject> getUserData();
+    Single<UserInfo> getUserData();
 }

@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
-
+import android.widget.Toast;
 import demo.com.userdata.R;
 import demo.com.userdata.contact.MainContact;
 import demo.com.userdata.presenter.MainPresenter;
@@ -69,5 +69,10 @@ public class MainActivity extends AppCompatActivity implements MainContact.View{
     @Override
     public void removeUserButton(boolean show) {
         userData.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_LONG).show();
     }
 }

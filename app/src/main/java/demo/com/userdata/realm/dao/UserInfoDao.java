@@ -1,7 +1,6 @@
 package demo.com.userdata.realm.dao;
 
 import java.util.List;
-
 import demo.com.userdata.retrofit.model.User;
 import demo.com.userdata.realm.OnCompleteListener;
 import io.realm.Realm;
@@ -12,7 +11,6 @@ public class UserInfoDao {
     public void updateUserInfoList(final List<User> users, OnCompleteListener listener) {
 
         Realm realmIns = null;
-
         try {
             realmIns = Realm.getDefaultInstance();
             realmIns.executeTransactionAsync(
@@ -31,7 +29,6 @@ public class UserInfoDao {
     public void setMaleImageByte(int id, byte[] imageByte, OnCompleteListener listener) {
 
         Realm realmIns = null;
-
         try {
             realmIns = Realm.getDefaultInstance();
             realmIns.executeTransactionAsync(realm -> {
@@ -60,4 +57,5 @@ public class UserInfoDao {
             realmIns.close();
         }
     }
+
 }

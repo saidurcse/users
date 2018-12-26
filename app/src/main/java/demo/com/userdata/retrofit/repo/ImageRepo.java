@@ -1,7 +1,6 @@
 package demo.com.userdata.retrofit.repo;
 
 import java.io.IOException;
-
 import demo.com.userdata.retrofit.OnRestCompleteListener;
 import demo.com.userdata.retrofit.ServiceGenerator;
 import demo.com.userdata.retrofit.endpoint.MaleImageEndPoint;
@@ -66,4 +65,5 @@ public class ImageRepo {
             }
         });
     }
+
 }
