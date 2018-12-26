@@ -31,14 +31,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Name"
+                android:text="@string/name"
                 android:textColor="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/Phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone"
+                android:text="@string/phone"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
     </LinearLayout>
